@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Modelo de desarrollo urbano - SIG</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- cupertino -->
+    <script src="https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css"></script>
+
+    <!-- plugin msgBox -->
+    <link href="msgBoxLight.css" rel="stylesheet" type="text/css">
+     <script src="jquery.msgBox.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="mdu.css">
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-10">
+
+          <table>
+            <tr>
+              <td width="65%" valign="top">
+                <fieldset class="ui-widget ui-corner-all">
+
+                <table>
+                  <tr>
+                    <td width="85"><label for="frente">Frente: </label> </td>
+                    <td><input id="frente"></td>
+
+                    <td width="110"><label for="largo"><span style="margin-left:13px;">Largo: </span></label></td>
+                    <td><input id="largo"></td>
+
+                    <td><label for="fondo"><span style="margin-left:13px;">Fondo: </span></label></td>
+                    <td><input id="fondo"></td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+
+                    <td width="85"><label for="retiroFrente">Retiro frente: </label></td>
+
+                    <td>
+                      <div class="ui-widget ui-widget-shadow">
+                        <select id="retiroFrente">
+                          <option value="">Seleccione uno...</option>
+                          <option value="3">3</option>
+                          <option value="5">5</option>
+                          <option value="7">7</option>
+                        </select>
+                      </div>
+                    </td>
+
+                    <td width="110"><label for="retiroLateral"><span style="margin-left:13px;">Retiro lateral: </span></label></td>
+                    <td><input id="retiroLateral"></td>
+                  </tr>
+                </table>
+
+                <table>
+                  <tr>
+                    <td><label for="nroPisoBas">Nro piso BAS: </label></td>
+                    <td><input id="nroPisoBas"></td>
+                  </tr>
+
+                  <tr>
+                    <td><label for="supComercioPB">Sup. Comercio PB: </label></td>
+                    <td><input id="supComercioPB"></td>
+                  </tr>
+
+                  <tr>
+                    <td><label for="supSemiCubPtaTipoFuste">Sup. Semicubierta Planta tipo Fuste: </label></td>
+                    <td><input id="supSemiCubPtaTipoFuste"></td>
+                  </tr>
+
+                  <tr>
+                    <td><label for="fotSinNorma">FOT S/Norma: </label></td>
+                    <td><input id="fotSegunNorma"></td>
+                  </tr>
+
+                  <tr>
+                    <td><label for="fosNorma">FOS S/Norma: </label></td>
+                    <td><input id="fosSegunNorma"></td>
+                  </tr>
+                </table>
+
+              </fieldset>
+
+              <br />
+
+              <button id="btnCalcular" class="ui-button ui-widget ui-corner-all">Calcular</button>
+
+            </td>
+
+              <!-- COLUMNA RESULTADOS -->
+            <td valign="top">
+              <div>
+                Resultados
+              </div>
+
+              <div class="ui-widget" id="resultados">
+                <table>
+                  <tr>
+                    <td>
+                      <span class="tituloRes resultado">Superficie terreno: </span> <span id="resSupTerreno"><a href=""></a></span> <br />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <span class="tituloRes resultado">Topologia permitida: </span><span id="resTopolPermitida"></span> <br />
+                    </td>
+                  </tr>
+
+            <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. Minima parcela: </span><span id="resSupMinParcela"></span> <br />
+            </td>
+                    </tr>
+
+                    <tr>
+            <td>
+                      <span class="tituloRes resultado">Retiro Fondo: </span><span id="resRetiroFondo"></span> <br />
+            </td>
+                    </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Altura Maxima: </span><span id="resAlturaMaxima"></span> <br />
+            </td>
+                    </tr>
+
+                    <tr>
+            <td>
+                      <span class="tituloRes resultado">Nro. de pisos: </span><span id="resNroPisos"></span> <br />
+            </td>
+                    </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Nro. piso FUS: </span><span id="resNroPisoFus"></span> <br />
+            </td>
+                    </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. cubierta edificable en PB: </span><span id="resSupCubEdifPB"></span> <br />
+            </td>
+                    </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. cubierta edificable en Basamento: </span><span id="resSupCubEdifEnBasamento"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. cubierta planta tipo fuste: </span><span id="resSupCubPlantaTipoFuste"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. Semicubierta para FOT Planta Tipo Fuste: </span><span id="resSupSemiCubFOTPtaTipoFuste"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. sin FOT Planta Tipo Fuste: </span><span id="resSupSinFOTPtaTipoFuste"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. Fuste para FOT: </span><span id="resSupFusteParaFot"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. Total Construida sin FOT: </span><span id="resSupTotalConsSinFot"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. Total Construida: </span><span id="resSupTotalConstruida"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">FOT: </span><span id="resFot"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">Sup. Maxima según FOT: </span><span id="resSupMaxSegunFOT"></span> <br />
+            </td>
+            </tr>
+
+                    <tr>
+                    <td>
+                      <span class="tituloRes resultado">FOS: </span><span id="resFos"></span> <br />
+            </td>
+            </tr>
+                    </table>
+                </div>
+              </td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
